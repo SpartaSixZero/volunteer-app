@@ -18,13 +18,13 @@ const styles = theme => ({
 });
 
 function Welcome(props) {
-  const { classes } = props
+  const { classes, onCheckInClickHandler } = props
   return (
     <div className={classes.root}>
       <Typography variant="h3" gutterBottom>
         Welcome to NC Food Bank
       </Typography>
-      <Button variant="contained" color="primary" className={classes.button}>
+      <Button variant="contained" color="primary" className={classes.button} onClick={onCheckInClickHandler}>
         Check-In
       </Button>
       <Button variant="contained" color="secondary" className={classes.button}>
@@ -36,6 +36,7 @@ function Welcome(props) {
 
 Welcome.propTypes = {
   classes: PropTypes.object.isRequired,
+  onCheckInClickHandler: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Welcome);
