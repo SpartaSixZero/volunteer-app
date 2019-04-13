@@ -78,7 +78,7 @@ class IndividualFinder extends Component {
               label="Date of Birth"
               disableFuture
               openTo="year"
-              format="DD/MM/YYYY"
+              format="MM/DD/YYYY"
               views={["year", "month", "day"]}
             />
           </form>
