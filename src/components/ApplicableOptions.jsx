@@ -45,16 +45,15 @@ const styles = theme => ({
 });
 
 class ApplicableOptions extends Component {
-  state = {
-    value: 'individual',
-  };
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      numOfHoursOnChange,
+      numOfHours,
+      volunteerType,
+      volunteerTypeOnChange,
+      applicableOptionsNextButtonClickHandler,
+    } = this.props;
 
     return (
       <div>
@@ -67,9 +66,10 @@ class ApplicableOptions extends Component {
               required
               id="standard-required"
               label="Number of Hours:"
-              defaultValue="6"
+              defaultValue={numOfHours}
               className={classes.textField}
               margin="normal"
+              onChange={numOfHoursOnChange}
             />
           </FormControl>
           <FormControl component="fieldset" className={classes.formControl}>
@@ -78,8 +78,8 @@ class ApplicableOptions extends Component {
               aria-label="Volunteer Type"
               name="volunteerType"
               className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
+              value={volunteerType}
+              onChange={volunteerTypeOnChange}
             >
               <FormControlLabel value="individual" control={<Radio color="primary" />} label="Individual" />
               <FormControlLabel value="group" control={<Radio color="primary" />} label="Group" />
@@ -88,7 +88,12 @@ class ApplicableOptions extends Component {
           </FormControl>
         </div>
         <div>
-          <Button variant="contained" color="primary" className={classes.button}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={applicableOptionsNextButtonClickHandler}
+          >
             Next
           </Button>
         </div>
@@ -99,6 +104,11 @@ class ApplicableOptions extends Component {
 
 ApplicableOptions.propTypes = {
   classes: PropTypes.object.isRequired,
+  numOfHours: PropTypes.string.isRequired,
+  volunteerType: PropTypes.string.isRequired,
+  numOfHoursOnChange: PropTypes.func.isRequired,
+  volunteerTypeOnChange: PropTypes.func.isRequired,
+  applicableOptionsNextButtonClickHandler: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ApplicableOptions);
