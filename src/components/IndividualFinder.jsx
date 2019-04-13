@@ -19,17 +19,34 @@ const styles = theme => ({
 });
 
 class IndividualFinder extends Component {
-
-  state = {
-    date: new Date(),
+  renderCreateAccountSection(userFound, classes, createAccountButtonClickHandler) {
+    if (!userFound) {
+      return (
+        <div style={{marginTop: 10, marginLeft: 10}}>
+          <Typography variant="body" gutterBottom >
+          We were unable to find you, please make sure your information is correct. Or click the button below to create NC Food Bank account.
+          </Typography>
+          <Button variant="contained" className={classes.button} onClick={createAccountButtonClickHandler}>
+            Create Account
+          </Button>
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
   render() {
-    const { classes, dateOfBirthOnChange, firstName, lastName, dateOfBirth } = this.props;
+    const {
+      classes,
+      dateOfBirthOnChange,
+      firstName,
+      lastName,
+      dateOfBirth,
+      findUserButtonClickHandler,
+      userFound,
+      createAccountButtonClickHandler,
+    } = this.props;
 
     return (
       <div>
@@ -67,7 +84,13 @@ class IndividualFinder extends Component {
           </form>
         </div>
         <div style={{marginTop: 10}}>
-          <Button variant="contained" color="primary" className={classes.button} style={{marginLeft: 10}}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            style={{marginLeft: 10}}
+            onClick={findUserButtonClickHandler}
+          >
             Find
           </Button>
           <Button variant="contained" className={classes.button} style={{marginLeft: 10}}>
@@ -77,6 +100,7 @@ class IndividualFinder extends Component {
             Start Over
           </Button>
         </div>
+        {this.renderCreateAccountSection(userFound, classes, createAccountButtonClickHandler)}
     </div>
     );
   }
@@ -85,6 +109,8 @@ class IndividualFinder extends Component {
 IndividualFinder.propTypes = {
   classes: PropTypes.object.isRequired,
   dateOfBirthOnChange: PropTypes.func.isRequired,
+  findUserButtonClickHandler: PropTypes.func.isRequired,
+  createAccountButtonClickHandler: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(IndividualFinder);

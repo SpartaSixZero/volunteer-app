@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Welcome from './Welcome';
 import ApplicableOptions from './ApplicableOptions';
 import IndividualFinder from './IndividualFinder';
+import CreateAccount from './CreateAccount';
 import MomentUtils from '@date-io/moment';
 
 class VolunteerApp extends Component {
@@ -14,12 +15,15 @@ class VolunteerApp extends Component {
       firstName: '',
       lastName: '',
       dateOfBirth: new Date(),
+      userFound: true,
     }
     this.onCheckInClickHandler = this.onCheckInClickHandler.bind(this);
     this.numOfHoursOnChange = this.numOfHoursOnChange.bind(this);
     this.volunteerTypeOnChange = this.volunteerTypeOnChange.bind(this);
     this.applicableOptionsNextButtonClickHandler = this.applicableOptionsNextButtonClickHandler.bind(this);
     this.dateOfBirthOnChange = this.dateOfBirthOnChange.bind(this);
+    this.findUserButtonClickHandler = this.findUserButtonClickHandler.bind(this);
+    this.createAccountButtonClickHandler = this.createAccountButtonClickHandler.bind(this);
   }
 
   onCheckInClickHandler() {
@@ -38,14 +42,19 @@ class VolunteerApp extends Component {
     this.setState({currentView: 'individualFinder'});
   }
 
+  createAccountButtonClickHandler() {
+    this.setState({currentView: 'createAccount'});
+  }
+
   dateOfBirthOnChange(date) {
-    console.log('date is ', date);
     const momentFunc = new MomentUtils();
     const dateString = momentFunc.format(date, "MM/DD/YYYY");
 
-    console.log('dateString is', dateString)
-
     this.setState({dateOfBirth: dateString});
+  }
+
+  findUserButtonClickHandler() {
+    this.setState({userFound: false});
   }
 
   render() {
@@ -69,8 +78,15 @@ class VolunteerApp extends Component {
             lastName={this.state.lastName}
             dateOfBirth={this.state.dateOfBirth}
             dateOfBirthOnChange={this.dateOfBirthOnChange}
+            findUserButtonClickHandler={this.findUserButtonClickHandler}
+            userFound={this.state.userFound}
+            createAccountButtonClickHandler={this.createAccountButtonClickHandler}
           />
-        )
+        );
+      case 'createAccount':
+        return (
+          <CreateAccount/>
+        );
       default:
         return <Welcome onCheckInClickHandler={this.onCheckInClickHandler}/>
     }
