@@ -29,107 +29,108 @@ class VolunteerApp extends Component {
       emergencyContact: '',
       emergencyContactPhone: '',
       relationshipWithEmergencyContact: '',
-      agreeWithFoodBankTerms: '',
+      agreeWithFoodBankTerms: false,
     }
-    this.onCheckInClickHandler = this.onCheckInClickHandler.bind(this);
-    this.numOfHoursOnChange = this.numOfHoursOnChange.bind(this);
-    this.volunteerTypeOnChange = this.volunteerTypeOnChange.bind(this);
-    this.applicableOptionsNextButtonClickHandler = this.applicableOptionsNextButtonClickHandler.bind(this);
-    this.findUserButtonClickHandler = this.findUserButtonClickHandler.bind(this);
-    this.createAccountButtonClickHandler = this.createAccountButtonClickHandler.bind(this);
-    this.checkInFirstNameOnChange = this.checkInFirstNameOnChange.bind(this);
-    this.checkInLastNameOnChange = this.checkInLastNameOnChange.bind(this);
-    this.checkInDateOfBirthOnChange = this.checkInDateOfBirthOnChange.bind(this);
-    this.firstNameOnChange = this.firstNameOnChange.bind(this);
-    this.lastNameOnChange = this.lastNameOnChange.bind(this);
-    this.companySchoolOrganizationOnChange = this.companySchoolOrganizationOnChange.bind(this);
-    this.permanentAddressOnChange = this.permanentAddressOnChange.bind(this);
-    this.homePhoneOnChange = this.homePhoneOnChange.bind(this);
-    this.cellPhoneOnChange = this.cellPhoneOnChange.bind(this);
-    this.emailOnChange = this.emailOnChange.bind(this);
-    this.dateOfBirthOnChange = this.dateOfBirthOnChange.bind(this);
-    this.physicalRestrictionsOnChange = this.physicalRestrictionsOnChange.bind(this);
-    this.specialSkillsOnChange = this.specialSkillsOnChange.bind(this);
   }
 
-  onCheckInClickHandler() {
+  onCheckInClickHandler = () => {
     this.setState({currentView: 'applicableOptions'});
   }
 
-  numOfHoursOnChange(event) {
+  numOfHoursOnChange = event => {
     this.setState({numOfHours: event.target.value});
   }
 
-  volunteerTypeOnChange(event) {
+  volunteerTypeOnChange = event => {
     this.setState({volunteerType: event.target.value});
   }
 
-  applicableOptionsNextButtonClickHandler() {
+  applicableOptionsNextButtonClickHandler = () => {
     this.setState({currentView: 'individualFinder'});
   }
 
-  checkInFirstNameOnChange(event) {
+  checkInFirstNameOnChange = event => {
     this.setState({checkInFirstName: event.target.value});
   }
 
-  checkInLastNameOnChange(event) {
+  checkInLastNameOnChange = event => {
     this.setState({checkInLastName: event.target.value});
   }
 
-  checkInDateOfBirthOnChange(date) {
+  checkInDateOfBirthOnChange = date => {
     const momentFunc = new MomentUtils();
     const dateString = momentFunc.format(date, "MM/DD/YYYY");
     this.setState({checkInDateOfBirth: dateString});
   }
 
-  createAccountButtonClickHandler() {
+  createAccountButtonClickHandler = () => {
     this.setState({currentView: 'createAccount'});
   }
 
-  findUserButtonClickHandler() {
+  findUserButtonClickHandler = () => {
     this.setState({userFound: false});
   }
 
-  firstNameOnChange(event) {
+  firstNameOnChange = event => {
     this.setState({firstName: event.target.value});
   }
 
-  lastNameOnChange(event) {
+  lastNameOnChange = event => {
     this.setState({lastName: event.target.value});
   }
 
-  companySchoolOrganizationOnChange(event) {
+  companySchoolOrganizationOnChange = event => {
     this.setState({companySchoolOrganization: event.target.value});
   }
 
-  permanentAddressOnChange(event) {
+  permanentAddressOnChange = event => {
     this.setState({permanentAddressOnChange: event.target.value});
   }
 
-  homePhoneOnChange(event) {
+  homePhoneOnChange = event => {
     this.setState({homePhone: event.target.value});
   }
 
-  cellPhoneOnChange(event) {
+  cellPhoneOnChange = event => {
     this.setState({cellPhone: event.target.value});
   }
 
-  emailOnChange(event) {
+  emailOnChange = event => {
     this.setState({email: event.target.value});
   }
 
-  dateOfBirthOnChange(date) {
+  dateOfBirthOnChange = date => {
     const momentFunc = new MomentUtils();
     const dateString = momentFunc.format(date, "MM/DD/YYYY");
     this.setState({dateOfBirth: dateString});
   }
 
-  physicalRestrictionsOnChange(event) {
+  physicalRestrictionsOnChange = event => {
     this.setState({physicalRestrictions: event.target.value});
   }
 
-  specialSkillsOnChange(event) {
+  specialSkillsOnChange = event => {
     this.setState({specialSkills: event.target.value});
+  }
+
+  emergencyContactOnChange = event => {
+    this.setState({emergencyContact: event.target.value});
+  }
+
+  emergencyContactPhoneOnChange = event => {
+    this.setState({emergencyContactPhone: event.target.value});
+  }
+
+  relationshipWithEmergencyContactOnChange = event => {
+    this.setState({relationshipWithEmergencyContact: event.target.value});
+  }
+
+  agreeWithFoodBankTermsOnChange = event => {
+    this.setState({agreeWithFoodBankTerms: event.target.checked});
+  }
+
+  agreementDialogOnAgreeButtonClick = () => {
+    this.setState({agreeWithFoodBankTerms: true});
   }
 
   render() {
@@ -162,7 +163,27 @@ class VolunteerApp extends Component {
         );
       case 'createAccount':
         return (
-          <CreateAccount/>
+          <CreateAccount
+            dateOfBirth={this.state.dateOfBirth}
+            physicalRestrictions={this.state.physicalRestrictions}
+            specialSkills={this.state.specialSkills}
+            agreeWithFoodBankTerms={this.state.agreeWithFoodBankTerms}
+            firstNameOnChange={this.firstNameOnChange}
+            lastNameOnChange={this.lastNameOnChange}
+            companySchoolOrganizationOnChange={this.companySchoolOrganizationOnChange}
+            permanentAddressOnChange={this.permanentAddressOnChange}
+            homePhoneOnChange={this.homePhoneOnChange}
+            cellPhoneOnChange={this.cellPhoneOnChange}
+            emailOnChange={this.emailOnChange}
+            dateOfBirthOnChange={this.dateOfBirthOnChange}
+            physicalRestrictionsOnChange={this.physicalRestrictionsOnChange}
+            specialSkillsOnChange={this.specialSkillsOnChange}
+            emergencyContactOnChange={this.emergencyContactOnChange}
+            emergencyContactPhoneOnChange={this.emergencyContactPhoneOnChange}
+            relationshipWithEmergencyContactOnChange={this.relationshipWithEmergencyContactOnChange}
+            agreeWithFoodBankTermsOnChange={this.agreeWithFoodBankTermsOnChange}
+            agreementDialogOnAgreeButtonClick={this.agreementDialogOnAgreeButtonClick}
+          />
         );
       default:
         return <Welcome onCheckInClickHandler={this.onCheckInClickHandler}/>
