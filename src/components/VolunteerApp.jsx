@@ -20,14 +20,14 @@ class VolunteerApp extends Component {
       lastName: '',
       companySchoolOrganization: '',
       permanentAddress: '',
-      homePhone: '',
-      cellPhone: '',
+      homePhone: '(  )    -    ',
+      cellPhone: '(  )    -    ',
       email: '',
       dateOfBirth: new Date(),
       physicalRestrictions: 'no',
       specialSkills: 'no',
       emergencyContact: '',
-      emergencyContactPhone: '',
+      emergencyContactPhone: '(  )    -    ',
       relationshipWithEmergencyContact: '',
       agreeWithFoodBankTerms: false,
     }
@@ -88,6 +88,7 @@ class VolunteerApp extends Component {
   }
 
   homePhoneOnChange = event => {
+    console.log('home phone on change is called');
     this.setState({homePhone: event.target.value});
   }
 
@@ -165,6 +166,9 @@ class VolunteerApp extends Component {
         return (
           <CreateAccount
             dateOfBirth={this.state.dateOfBirth}
+            homePhone={this.state.homePhone}
+            cellPhone={this.state.cellPhone}
+            emergencyContactPhone={this.state.emergencyContactPhone}
             physicalRestrictions={this.state.physicalRestrictions}
             specialSkills={this.state.specialSkills}
             agreeWithFoodBankTerms={this.state.agreeWithFoodBankTerms}

@@ -66,7 +66,6 @@ const styles = theme => ({
 
 class CreateAccount extends Component {
   state = {
-    textmask: '(  )    -    ',
     open: false,
   }
 
@@ -87,6 +86,9 @@ class CreateAccount extends Component {
     const {
       classes,
       dateOfBirth,
+      homePhone,
+      cellPhone,
+      emergencyContactPhone,
       physicalRestrictions,
       specialSkills,
       agreeWithFoodBankTerms,
@@ -147,7 +149,7 @@ class CreateAccount extends Component {
           <FormControl margin="normal" style={{marginRight: 10}}>
             <InputLabel htmlFor="home-phone-field">Home Phone</InputLabel>
             <Input
-              value={textmask}
+              value={homePhone}
               id="home-phone-field"
               inputComponent={TextMaskCustom}
               onChange={homePhoneOnChange}
@@ -156,7 +158,7 @@ class CreateAccount extends Component {
           <FormControl margin="normal">
             <InputLabel htmlFor="cell-phone-field">Cell Phone</InputLabel>
             <Input
-              value={textmask}
+              value={cellPhone}
               id="cell-phone-field"
               inputComponent={TextMaskCustom}
               onChange={cellPhoneOnChange}
@@ -216,7 +218,7 @@ class CreateAccount extends Component {
           <FormControl margin="normal">
             <InputLabel htmlFor="emergency-contact-phone-field">Emergency Contact Phone #</InputLabel>
             <Input
-              value={textmask}
+              value={emergencyContactPhone}
               id="emergency-contact-phone-field"
               inputComponent={TextMaskCustom}
               onChange={emergencyContactPhoneOnChange}
@@ -281,6 +283,9 @@ class CreateAccount extends Component {
 CreateAccount.propTypes = {
   classes: PropTypes.object.isRequired,
   dateOfBirth: PropTypes.string.isRequired,
+  homePhone: PropTypes.string.isRequired,
+  cellPhone: PropTypes.string.isRequired,
+  emergencyContactPhone: PropTypes.string.isRequired,
   physicalRestrictions: PropTypes.string.isRequired,
   specialSkills: PropTypes.string.isRequired,
   agreeWithFoodBankTerms: PropTypes.bool.isRequired,
